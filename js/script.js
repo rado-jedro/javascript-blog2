@@ -49,6 +49,7 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
+  // eslint-disable-next-line no-unused-vars
   optTagsListSelector ='.tags.list';
 
 function generateTitleLinks(customSelector = ''){
@@ -123,6 +124,7 @@ function generateTags(){
       html = html + linkHTML;
       console.log(html);
       /* [NEW] check if this link is NOT already in allTags */
+      // eslint-disable-next-line no-prototype-builtins
       if(!allTags.hasOwnProperty(tag)){
         /* [NEW] add generated code to allTags object */
         allTags[tag] = 1;
@@ -141,14 +143,17 @@ function generateTags(){
 
   /* [NEW] add html from allTags to tagList */
   //tagList.innerHTML = allTags.join(' ');
+  console.log(allTags);
   
   /*[NEW] create variable for all links HTML code */
   let allTagsHTML ='';
 
   /* [NEW] START LOOP: for each tag in allTags: */
-  for(let tag of allTags){
-    /* [NEW] generate code of a link and add it it allTagsHTML */
-    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+  for(let tag of Object.keys(allTags)){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    
+    allTagsHTML += '<li><a href="#tag-' + tag   +' (' + allTags[tag] + ') ' + ' "> ' + tag +' (' + allTags[tag] + ') '  +' </a></li> ' ; 
+    console.log(allTagsHTML);
   /* [NEW] END LOOP: for each tag in allTags: */
   }
   /* [NEW] add html from allTagsHTML*/
