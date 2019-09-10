@@ -50,7 +50,11 @@ const optArticleSelector = '.post',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
   // eslint-disable-next-line no-unused-vars
-  optTagsListSelector ='.tags.list';
+  optTagsListSelector ='.tags.list',
+  // eslint-disable-next-line no-unused-vars
+  optCloudClassCount = '5',
+  // eslint-disable-next-line no-unused-vars
+  optCloudClassPrefix = 'tag-size-';
 
 function generateTitleLinks(customSelector = ''){
   /* remove contents of titleList */
@@ -94,6 +98,32 @@ function generateTitleLinks(customSelector = ''){
   }
 }
 generateTitleLinks();
+
+const calculateTagsParams = function(tags) {
+  const params = {max: 0, min: 999999};
+  for(let tag of Object.keys(tags) ) {
+    console.log(tag + ' is used ' + tags[tag] + ' times');
+    if(tags[tag] > params.max) {
+      params.max = tags[tag];
+    }
+    if(tags[tag] < params.min) {
+      params.min = tags[tag];
+    }
+  }
+  return params;
+};
+
+// eslint-disable-next-line no-unused-vars
+const calculateTagClass = function(count, params) {
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+  return optCloudClassPrefix + classNumber;
+};
+
+
+
 
 function generateTags(){
   /* [NEW] create a new variable allTags with an empty object */
@@ -140,19 +170,27 @@ function generateTags(){
   }
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector('.tags');
-
+  const tagsParams = calculateTagsParams(allTags);
   /* [NEW] add html from allTags to tagList */
   //tagList.innerHTML = allTags.join(' ');
   console.log(allTags);
   
   /*[NEW] create variable for all links HTML code */
   let allTagsHTML ='';
+  // eslint-disable-next-line no-undef
+  const tagParams = calculateTagsParams(allTags);
+  console.log('tagParams:', tagParams);
 
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag of Object.keys(allTags)){
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    
-    allTagsHTML += '<li><a href="#tag-' + tag   +' (' + allTags[tag] + ') ' + ' "> ' + tag +' (' + allTags[tag] + ') '  +' </a></li> ' ; 
+    const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
+    // eslint-disable-next-line no-undef
+    //const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParams) + '</li>';
+    console.log(tagLinkHTML);
+    //allTagsHTML += '<li><a href="#tag-' + tag + '"> ' + tag +' (' + allTags[tag] + ')'  +' </a></li> ' ; 
+
+    allTagsHTML +=  '<li><a class="' + tagLinkHTML + '" href="#tag-' + tag +'">' + tag + '</a></li>';
     console.log(allTagsHTML);
   /* [NEW] END LOOP: for each tag in allTags: */
   }
