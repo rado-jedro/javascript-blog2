@@ -91,6 +91,40 @@ body {
   }
 }
 
+.sidebar .list.tags li {
+  display: inline;
+  a {
+    text-decoration: none;
+    &::after {
+      content: ' ';
+    }
+  }
+}
+
+.sidebar .list.tags {
+  .tag-size-5 {
+    font-size: 30px;
+    color: blue;
+  }
+  .tag-size-4 {
+    font-size: 26px;
+    color: red;
+  }
+  .tag-size-3 {
+    font-size: 23px;
+    color: green;
+  }
+  .tag-size-2 {
+    font-size: 18px;
+    color: pink;
+  }
+  .tag-size-1 {
+    font-size: 15px;
+    color: grey;
+  }
+}
+
+
 /* Authors */
 
 .authors {
