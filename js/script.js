@@ -286,8 +286,7 @@ function generateAuthors(){
     /* END LOOP: for every article: */
   }
   /* [NEW] find list of tags in right column */
-  // eslint-disable-next-line no-unused-vars
-  const authorList = document.querySelector('.authors');
+  const authorList = document.querySelector(optAuthorsListSelector);
   console.log(authorList);
   /* [NEW] create new variable for all author links HTML code*/
   let allAuthorsHTML = '';
