@@ -5,6 +5,12 @@ document.getElementById('test-button').addEventListener('click', function(){
     console.log('links:', links);
   });
 */
+// eslint-disable-next-line no-unused-vars
+const templates = {
+  // eslint-disable-next-line no-undef
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+};
+
 const titleClickHandler = function(event){
   const clickedElement = this;
   console.log('Link was clicked!');
