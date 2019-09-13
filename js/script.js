@@ -7,8 +7,9 @@ document.getElementById('test-button').addEventListener('click', function(){
 */
 // eslint-disable-next-line no-unused-vars
 const templates = {
-  // eslint-disable-next-line no-undef
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
 };
 
 const titleClickHandler = function(event){
@@ -90,9 +91,9 @@ function generateTitleLinks(customSelector = ''){
     console.log(articleTitle);
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    console.log(linkHTML);
-
+    //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     /* insert link into html variable */
     html = html + linkHTML;
   }
@@ -156,7 +157,9 @@ function generateTags(){
     for(let tag of articleTagsArray) {
       console.log(tag);
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-'+ tag +'">' + tag  +'</a></li>';
+      //const linkHTML = '<li><a href="#tag-'+ tag +'">' + tag  +'</a></li>';
+      const linkHTMLData = {id: tag, title: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
       console.log(linkHTML);
       /* add generated code to html variable */
       html = html + linkHTML;
@@ -272,7 +275,10 @@ function generateAuthors(){
     let articleAuthor = article.getAttribute('data-author');
     console.log(articleAuthor);
     /* generate HTML of the link */
-    const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
+    //const linkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
+
+    const linkHTMLData = {id: articleAuthor, title: articleAuthor};
+    const linkHTML = templates.authorLink(linkHTMLData);
     console.log(linkHTML);
     /* add generated code to html variable */
     html= html + linkHTML;
