@@ -2,9 +2,7 @@
 
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
 const templates = {
-  // eslint-disable-next-line no-undef
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
@@ -130,8 +128,6 @@ const calculateTagClass = function(count, params) {
   const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
   return optCloudClassPrefix + classNumber;
 };
-
-
 
 
 function generateTags(){
